@@ -21,3 +21,11 @@ INSERT INTO employee_payroll values ('Prateek',25000,'2020-02-14'),('Manjesh',20
 
 --to select all / display the table
 select * from employee_payroll
+
+--Retrieve salary data from particular employee
+SELECT salary FROM employee_payroll
+WHERE name = 'Prateek'
+
+--Retrieve Names from the selected date to present date
+select name FROM employee_payroll
+WHERE startdate BETWEEN CAST('2020-01-01' AS DATE) AND GETDATE()
