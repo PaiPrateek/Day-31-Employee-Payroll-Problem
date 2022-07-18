@@ -29,3 +29,14 @@ WHERE name = 'Prateek'
 --Retrieve Names from the selected date to present date
 select name FROM employee_payroll
 WHERE startdate BETWEEN CAST('2020-01-01' AS DATE) AND GETDATE()
+
+--Alter table to add gender column
+ALTER TABLE employee_payroll
+add  gender char 
+
+--update the gender 
+update  employee_payroll
+set gender = 'M'
+
+--add field gender field after name field
+select id,name,gender,startdate,salary from employee_payroll
