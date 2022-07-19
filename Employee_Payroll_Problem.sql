@@ -89,6 +89,29 @@ alter column address varchar(25)  not null
 --ionsert the data into employee_payroll table
 insert into employee_payroll values ('Rakesh',20000,'2019-12-15','M',8642516384,'Hubli','Production')
 
+--Altering the table by adding additional information regarding salaryies of employee
+ALTER TABLE employee_payroll
+add BasicPay float, Deductions float, TaxablePay float, IncomeTax float, NetPay float
+
+--updating the phone, address and department field 
+update employee_payroll
+set BasicPay = 25000, Deductions = 2000, TaxablePay = 1000, IncomeTax = 500, NetPay= 21500 where name = 'Prateek'
+
+update employee_payroll
+set BasicPay = 20000, Deductions = 1000, TaxablePay = 1000, IncomeTax = 200, NetPay= 18000 where name = 'Manjesh'
+
+update employee_payroll
+set BasicPay = 35000, Deductions = 2500, TaxablePay = 1500, IncomeTax = 500, NetPay= 30000 where name = 'Suhas'
+
+update employee_payroll
+set BasicPay = 15000, Deductions = 500, TaxablePay = 500, IncomeTax = 100, NetPay= 13500 where name = 'Prajwal'
+
+update employee_payroll
+set BasicPay = 18000, Deductions = 1000, TaxablePay = 500, IncomeTax = 100, NetPay= 16000 where name = 'Sanath'
+
+update employee_payroll
+set BasicPay = 20000, Deductions = 1000, TaxablePay = 1000, IncomeTax = 200, NetPay= 18000  where name = 'Rakesh'
+
 
 
 
