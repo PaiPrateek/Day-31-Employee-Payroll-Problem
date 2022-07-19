@@ -55,3 +55,42 @@ select MAX(salary) FROM employee_payroll where gender = 'M' GROUP BY gender
 
 --Number of employee groupby Male employee
 select COUNT(salary) FROM employee_payroll where gender = 'M' GROUP BY gender
+
+--Alter the Table
+ALTER TABLE employee_payroll
+add phone bigint , address varchar(25) default 'Bangalore', department varchar(20) 
+
+select * from employee_payroll
+
+--updating the phone, address and department field 
+update employee_payroll
+set phone = 9945007207, address = 'Bangalore', department = 'Mechanical' where name = 'Prateek'
+
+update employee_payroll
+set phone = 82115363496, address = 'Pavagada', department = 'Electronics' where name = 'Manjesh'
+
+update employee_payroll
+set phone = 7760054592, address = 'Bangalore', department = 'Civil' where name = 'Suhas'
+
+update employee_payroll
+set phone = 9865327452, address = 'Chitradurga', department = 'Computer Science' where name = 'Prajwal'
+
+update employee_payroll
+set phone = 8762265775, address = 'Udupi', department = 'Electrical' where name = 'Sanath'
+
+--Altering the column deparment to not null
+ALTER table employee_payroll
+alter column department varchar(20) not null
+
+--Altering the column address to not null
+ALTER table employee_payroll
+alter column address varchar(25)  not null
+
+--ionsert the data into employee_payroll table
+insert into employee_payroll values ('Rakesh',20000,'2019-12-15','M',8642516384,'Hubli','Production')
+
+
+
+
+
+
