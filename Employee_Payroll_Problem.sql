@@ -32,7 +32,7 @@ WHERE startdate BETWEEN CAST('2020-01-01' AS DATE) AND GETDATE()
 
 --Alter table to add gender column
 ALTER TABLE employee_payroll
-add  gender char 
+add  gender char(1) 
 
 --update the gender 
 update  employee_payroll
@@ -210,3 +210,12 @@ select MAX(salary) FROM employee_payroll where gender = 'F' GROUP BY gender
 --Number of employee groupby Male employee
 select COUNT(salary) FROM employee_payroll where gender = 'M' GROUP BY gender
 select COUNT(salary) FROM employee_payroll where gender = 'F' GROUP BY gender
+
+-- Creating Store Procedure
+create procedure GetEmployeeDetails
+as
+select * from  employee_payroll
+go
+
+--calling the store procedure
+exec GetEmployeeDetails
