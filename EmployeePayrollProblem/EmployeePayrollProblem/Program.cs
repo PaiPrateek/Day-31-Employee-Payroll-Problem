@@ -54,6 +54,9 @@ namespace EmployeePayrollProblem
 
             //Retrieve Number (Count) of Female Employee 
             COUNTofFemaleEmployee();
+
+            //Add Employee to the Payroll
+            AddNewEmployeeToAddressBook("Shrikanth");
         }
 
         //Method to Read all the data in the database
@@ -360,6 +363,27 @@ namespace EmployeePayrollProblem
 
             int reader = (int)cmd.ExecuteScalar();
             Console.WriteLine("Number (Count) of Female Employee : " + reader);
+            Console.ReadKey();
+        }
+
+        //Add Employee to the Payroll
+        public static void AddNewEmployeeToAddressBook(string EmployeeName)
+        {
+            EmployeePayroll emp = new EmployeePayroll()
+            {
+                name = EmployeeName,
+                salary = 300000,
+                address = "Bangalore"
+
+            };
+            var SQL = @$"INSERT INTO employee_payroll (name, salary,startdate,address) Values ('{emp.name}','{emp.salary}','2017-04-12','{emp.address}')";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=payroll_service;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            int reader = cmd.ExecuteNonQuery();
+            Console.WriteLine(reader);
+            Console.WriteLine("Employee added Successfully");
             Console.ReadKey();
         }
     }
