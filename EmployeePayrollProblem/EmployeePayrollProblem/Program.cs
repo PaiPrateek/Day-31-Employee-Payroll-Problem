@@ -8,7 +8,7 @@ namespace EmployeePayrollProblem
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Employee Payroll Problem");
+            //Console.WriteLine("Welcome to Employee Payroll Problem");
 
             //To Display the data in database
             ReadDataFromDataBase();
@@ -57,6 +57,9 @@ namespace EmployeePayrollProblem
 
             //Add Employee to the Payroll
             AddNewEmployeeToAddressBook("Shrikanth");
+
+            //Add Payroll details of newly added Employee to the Payroll
+            AddNewPayrollDetailsofNewlyAddedEmployeeToAddressBook("Shrikanth");
         }
 
         //Method to Read all the data in the database
@@ -384,6 +387,24 @@ namespace EmployeePayrollProblem
             int reader = cmd.ExecuteNonQuery();
             Console.WriteLine(reader);
             Console.WriteLine("Employee added Successfully");
+            Console.ReadKey();
+        }
+        //Add Payroll details of newly added Employee to the Payroll
+        public static void AddNewPayrollDetailsofNewlyAddedEmployeeToAddressBook(string EmployeeName) 
+        {
+            EmployeePayroll emp = new EmployeePayroll()
+            {
+                name = EmployeeName,
+
+            };
+            var SQL = @$"update employee_payroll set  gender = 'M', phone = 6642531895, departmentID = 2, BasicPay = 45000, Deductions = 9000, TaxablePay = 1000, IncomeTax = 1000, NetPay= 34000 where name = '{emp.name}'";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=payroll_service;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            int reader = cmd.ExecuteNonQuery();
+            Console.WriteLine(reader);
+            Console.WriteLine("Updated the payroll details Successfully");
             Console.ReadKey();
         }
     }
