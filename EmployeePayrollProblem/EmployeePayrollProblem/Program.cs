@@ -24,6 +24,36 @@ namespace EmployeePayrollProblem
 
             //Retrieve employees joined in particular date range
             RetrieveEmployeeFromParticularDateRange();
+
+            //Retrieve Sum of Male Employee Salary
+            SUMofMaleEmployeeSalary();
+
+            //Retrieve Sum of Male Employee Salary
+            SUMofFemaleEmployeeSalary();
+
+            //Retrieve Average Salary of Male Employee
+            AVGofMaleEmployeeSalary();
+
+            //Retrieve Average Salary of Female Employee
+            AVGofFemaleEmployeeSalary();
+
+            //Retrieve Minimum Salary of Male Employee 
+            MINofMaleEmployeeSalary();
+
+            //Retrieve Minimum Salary of Female Employee 
+            MINofFemaleEmployeeSalary();
+
+            //Retrieve Maximum Salary of Male Employee 
+            MAXofMaleEmployeeSalary();
+
+            //Retrieve Maximum Salary of Female Employee 
+            MAXofFemaleEmployeeSalary();
+
+            //Retrieve Number (Count) of Male Employee 
+            COUNTofMaleEmployee();
+
+            //Retrieve Number (Count) of Female Employee 
+            COUNTofFemaleEmployee();
         }
 
         //Method to Read all the data in the database
@@ -199,6 +229,137 @@ namespace EmployeePayrollProblem
                 reader.Close();
             };
             Console.WriteLine("\nRetrieve data Successfully");
+            Console.ReadKey();
+        }
+
+        //Retrieve Sum of Male Employee Salary
+        public static void SUMofMaleEmployeeSalary()
+        {
+            var SQL = @$"select SUM(salary) FROM employee_payroll where gender = 'M' GROUP BY gender";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=payroll_service;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+
+            int reader = (int)cmd.ExecuteScalar();
+            Console.WriteLine("Sum of Male Employee Salary is : "+reader);;
+            Console.ReadKey();
+        }
+        //Retrieve Sum of Female Employee Salary
+        public static void SUMofFemaleEmployeeSalary()
+        {
+            var SQL = @$"select SUM(salary) FROM employee_payroll where gender = 'F' GROUP BY gender";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=payroll_service;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+
+            int reader = (int)cmd.ExecuteScalar();
+            Console.WriteLine("Sum of Female Employee Salary is : " + reader);
+            Console.ReadKey();
+        }
+        //Retrieve Average Salary of Male Employee
+        public static void AVGofMaleEmployeeSalary()
+        {
+            var SQL = @$"select AVG(salary) FROM employee_payroll where gender = 'M' GROUP BY gender";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=payroll_service;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+
+            int reader = (int)cmd.ExecuteScalar();
+            Console.WriteLine("Average Salary of Male Employee is : " + reader); ;
+            Console.ReadKey();
+        }
+        //Retrieve Average Salary of Female Employee
+        public static void AVGofFemaleEmployeeSalary()
+        {
+            var SQL = @$"select AVG(salary) FROM employee_payroll where gender = 'F' GROUP BY gender";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=payroll_service;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+
+            int reader = (int)cmd.ExecuteScalar();
+            Console.WriteLine("Average Salary of Female Employee is : " + reader);
+            Console.ReadKey();
+        }
+        //Retrieve Minimum Salary of Male Employee 
+        public static void MINofMaleEmployeeSalary()
+        {
+            var SQL = @$"select MIN(salary) FROM employee_payroll where gender = 'M' GROUP BY gender";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=payroll_service;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+
+            int reader = (int)cmd.ExecuteScalar();
+            Console.WriteLine("Minimum Salary of Male Employee is : " + reader); ;
+            Console.ReadKey();
+        }
+        //Retrieve Minimum Salary of Female Employee 
+        public static void MINofFemaleEmployeeSalary()
+        {
+            var SQL = @$"select MIN(salary) FROM employee_payroll where gender = 'F' GROUP BY gender";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=payroll_service;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+
+            int reader = (int)cmd.ExecuteScalar();
+            Console.WriteLine("Minimum Salary of Female Employee is : " + reader);
+            Console.ReadKey();
+        }
+        //Retrieve Maximum Salary of Male Employee 
+        public static void MAXofMaleEmployeeSalary()
+        {
+            var SQL = @$"select MAX(salary) FROM employee_payroll where gender = 'M' GROUP BY gender";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=payroll_service;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+
+            int reader = (int)cmd.ExecuteScalar();
+            Console.WriteLine("Maximum Salary of Male Employee is : " + reader); ;
+            Console.ReadKey();
+        }
+        //Retrieve Maximum Salary of Female Employee 
+        public static void MAXofFemaleEmployeeSalary()
+        {
+            var SQL = @$"select MAX(salary) FROM employee_payroll where gender = 'F' GROUP BY gender";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=payroll_service;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+
+            int reader = (int)cmd.ExecuteScalar();
+            Console.WriteLine("Maximum Salary of Female Employee is : " + reader);
+            Console.ReadKey();
+        }
+        //Retrieve Number (Count) of Male Employee 
+        public static void COUNTofMaleEmployee()
+        {
+            var SQL = @$"select COUNT(salary) FROM employee_payroll where gender = 'M' GROUP BY gender";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=payroll_service;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+
+            int reader = (int)cmd.ExecuteScalar();
+            Console.WriteLine("Number (Count) of Male Employee is : " + reader); ;
+            Console.ReadKey();
+        }
+        //Retrieve Number (Count) of Female Employee 
+        public static void COUNTofFemaleEmployee()
+        {
+            var SQL = @$"select COUNT(salary) FROM employee_payroll where gender = 'F' GROUP BY gender";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=payroll_service;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+
+            int reader = (int)cmd.ExecuteScalar();
+            Console.WriteLine("Number (Count) of Female Employee : " + reader);
             Console.ReadKey();
         }
     }
