@@ -120,7 +120,8 @@ namespace EmployeePayrollProblem
             //Add Payroll details of newly added Employee to the Payroll
             AddEmployeeToAddressBook();
 
-
+            //Remove the employee from payroll
+            RemoveEmployeeFromPayroll();
         }
 
         //Method to Read all the data in the database
@@ -518,6 +519,20 @@ namespace EmployeePayrollProblem
             int reader = cmd.ExecuteNonQuery();
             Console.WriteLine(reader);
             Console.WriteLine("Employee added Successfully");
+            Console.ReadKey();
+        }
+
+        //Remove Employee from the Payroll
+        public static void RemoveEmployeeFromPayroll()
+        {
+            var SQL = @$"delete from employee_payroll where name = 'Terissa'";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=payroll_service;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            int reader = cmd.ExecuteNonQuery();
+            Console.WriteLine(reader);
+            Console.WriteLine("Employee Removed Successfully");
             Console.ReadKey();
         }
     }
