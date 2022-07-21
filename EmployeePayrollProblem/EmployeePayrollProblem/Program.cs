@@ -69,6 +69,8 @@ namespace EmployeePayrollProblem
 
 
             // UC10 ensuring UC2-UC7 will work with new ER Diagram
+
+
             //Retrieve the employee payroll from  database
             RetrieveEmployeePayrollFromDataBase();   //UC2
 
@@ -113,6 +115,11 @@ namespace EmployeePayrollProblem
 
             //Add Employee to the Payroll
             AddNewEmployeeToAddressBook("Mukund"); //UC7
+
+            //---------------------------******************************************---------------------------
+            //Add Payroll details of newly added Employee to the Payroll
+            AddEmployeeToAddressBook();
+
 
         }
 
@@ -498,6 +505,20 @@ namespace EmployeePayrollProblem
             {
                 connection.Close();
             }
+        }
+
+        //Add Payroll details of newly added Employee to the Payroll
+        public static void AddEmployeeToAddressBook() 
+        {
+            var SQL = @$"insert into employee_payroll values ('Alexa', 100000, '2016-08-28', 'F',7534286951,'Chennai',85000, 10000, 5000, 2500, 90000,1)";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=payroll_service;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            int reader = cmd.ExecuteNonQuery();
+            Console.WriteLine(reader);
+            Console.WriteLine("Employee added Successfully");
+            Console.ReadKey();
         }
     }
 }
