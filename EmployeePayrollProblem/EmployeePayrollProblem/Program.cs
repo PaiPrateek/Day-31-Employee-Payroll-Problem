@@ -4,11 +4,11 @@ using System.Data.SqlClient;
 
 namespace EmployeePayrollProblem
 {
-    public  class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            //Console.WriteLine("Welcome to Employee Payroll Problem");
+            Console.WriteLine("Welcome to Employee Payroll Problem");
 
             //To Display the data in database
             ReadDataFromDataBase();
@@ -60,6 +60,9 @@ namespace EmployeePayrollProblem
 
             //Add Payroll details of newly added Employee to the Payroll
             AddNewPayrollDetailsofNewlyAddedEmployeeToAddressBook("Shrikanth");
+
+            //Method to Read all the data from departmentdetails
+            GetDepartmentDetails();
         }
 
         //Method to Read all the data in the database
@@ -110,9 +113,10 @@ namespace EmployeePayrollProblem
                         "\nNet Pay :" + emp.NetPay +
                         "\nDepartment ID :" + emp.DepartmentID);
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
-                Console.WriteLine("Exception :"+e.Message);
+                Console.WriteLine("Exception :" + e.Message);
             }
             finally
             {
@@ -194,16 +198,16 @@ namespace EmployeePayrollProblem
         }
 
         //Update the Base Pay for employee Terissa using prepared statement
-        public static void UpdateBasePayPreparedSTatement(string EmployeeName )
+        public static void UpdateBasePayPreparedSTatement(string EmployeeName)
         {
             EmployeePayroll emp = new EmployeePayroll()
             {
                 name = EmployeeName,
-                BasicPay=3000000,
-                Deductions=1000000,
-                TaxablePay=400000,
-                IncomeTax=600000,
-                NetPay=200000
+                BasicPay = 3000000,
+                Deductions = 1000000,
+                TaxablePay = 400000,
+                IncomeTax = 600000,
+                NetPay = 200000
             };
             var SQL = @$"UPDATE employee_payroll SET BasicPay = '{emp.BasicPay}', Deductions = '{emp.Deductions}', TaxablePay= '{emp.TaxablePay}', IncomeTax = '{emp.IncomeTax}', NetPay = '{emp.NetPay}' WHERE name = '{emp.name}'";
             string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=payroll_service;Integrated Security=True";
@@ -226,7 +230,7 @@ namespace EmployeePayrollProblem
             connection.Open();
             SqlDataReader reader = cmd.ExecuteReader();
 
-            if(reader.HasRows)
+            if (reader.HasRows)
             {
                 while (reader.Read())
                 {
@@ -248,7 +252,7 @@ namespace EmployeePayrollProblem
             connection.Open();
 
             int reader = (int)cmd.ExecuteScalar();
-            Console.WriteLine("Sum of Male Employee Salary is : "+reader);;
+            Console.WriteLine("Sum of Male Employee Salary is : " + reader); ;
             Console.ReadKey();
         }
         //Retrieve Sum of Female Employee Salary
@@ -390,7 +394,7 @@ namespace EmployeePayrollProblem
             Console.ReadKey();
         }
         //Add Payroll details of newly added Employee to the Payroll
-        public static void AddNewPayrollDetailsofNewlyAddedEmployeeToAddressBook(string EmployeeName) 
+        public static void AddNewPayrollDetailsofNewlyAddedEmployeeToAddressBook(string EmployeeName)
         {
             EmployeePayroll emp = new EmployeePayroll()
             {
@@ -406,6 +410,43 @@ namespace EmployeePayrollProblem
             Console.WriteLine(reader);
             Console.WriteLine("Updated the payroll details Successfully");
             Console.ReadKey();
+        }
+        //Method to Read all the data from departmentdetails
+        public static void GetDepartmentDetails()
+        {
+            string SQL = "select * from departmentdetails";
+            string connectingstring = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=payroll_service;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingstring);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            try
+            {
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                List<EmployeeDepartment> departmentdetails = new List<EmployeeDepartment>();
+                while (reader.Read())
+                {
+                    var deptDetails = new EmployeeDepartment();
+                    deptDetails.DepartmentID = reader.GetInt32(0);
+                    deptDetails.Department = reader.GetString(1);
+
+                    departmentdetails.Add(deptDetails);
+                }
+                reader.Close();
+                foreach (var dept in departmentdetails)
+                {
+                    Console.WriteLine("\nDepartment ID :" + dept.DepartmentID +
+                        "\nDepartment Name :" + dept.Department);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception :" + e.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
     }
 }
