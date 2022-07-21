@@ -8,7 +8,7 @@ namespace EmployeePayrollProblem
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome tpo Employee Payroll Problem");
+            Console.WriteLine("Welcome to Employee Payroll Problem");
 
             //To Display the data in database
             ReadDataFromDataBase();
@@ -21,6 +21,9 @@ namespace EmployeePayrollProblem
 
             //Update the Base Pay for employee Terissa using prepared statement
             UpdateBasePayPreparedSTatement("Terissa");
+
+            //Retrieve employees joined in particular date range
+            RetrieveEmployeeFromParticularDateRange();
         }
 
         //Method to Read all the data in the database
@@ -174,6 +177,28 @@ namespace EmployeePayrollProblem
             int reader = cmd.ExecuteNonQuery();
             Console.WriteLine(reader);
             Console.WriteLine("Updated the Basic Pay Successfully");
+            Console.ReadKey();
+        }
+
+        //Retrieve employees joined in particular date range
+        public static void RetrieveEmployeeFromParticularDateRange()
+        {
+            var SQL = @$"select name FROM employee_payroll WHERE startdate BETWEEN CAST('2019-01-01' AS DATE) AND GETDATE()";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=payroll_service;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            if(reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    Console.WriteLine("Employee Name {0}", reader["name"]);
+                }
+                reader.Close();
+            };
+            Console.WriteLine("\nRetrieve data Successfully");
             Console.ReadKey();
         }
     }

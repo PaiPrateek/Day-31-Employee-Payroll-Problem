@@ -188,8 +188,7 @@ SELECT salary FROM employee_payroll
 WHERE name = 'Terissa'
 
 --Retrieve Names from the selected date to present date
-select name FROM employee_payroll
-WHERE startdate BETWEEN CAST('2019-01-01' AS DATE) AND GETDATE()
+select name FROM employee_payroll WHERE startdate BETWEEN CAST('2019-01-01' AS DATE) AND GETDATE()
 
 --Sum of salary of employee groupby Male employee
 select SUM(salary) FROM employee_payroll where gender = 'M' GROUP BY gender
